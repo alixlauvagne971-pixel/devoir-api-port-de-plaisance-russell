@@ -17,7 +17,8 @@ const catwaySchema = new mongoose.Schema({
     trim: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'catways'
 })
 
 module.exports = mongoose.model('Catway', catwaySchema)

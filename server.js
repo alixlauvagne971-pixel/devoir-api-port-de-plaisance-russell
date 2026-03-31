@@ -23,8 +23,20 @@ app.use('/catways', catwayRoutes)
 
 // Connexion MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connecté'))
-  .catch((err) => console.log(err))
+  .then(async () => {
+    console.log('MongoDB connecté')
+    console.log('Base active :', mongoose.connection.name)
+
+    const collections = await mongoose.connection.db.listCollections().toArray()
+    console.log('Collections :', collections.map(c => c.name))
+
+    const catwaysCount = await mongoose.connection.db.collection('catways').countDocuments()
+    const reservationsCount = await mongoose.connection.db.collection('reservations').countDocuments()
+
+    console.log('Nombre catways :', catwaysCount)
+    console.log('Nombre reservations :', reservationsCount)
+  })
+  .catch((err) => console.log('Erreur MongoDB :', err))
 
 // Port
 const PORT = process.env.PORT || 3000
