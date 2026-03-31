@@ -1,9 +1,6 @@
-function authMiddleware(req, res, next) {
+module.exports = (req, res, next) => {
   if (!req.session.user) {
-    return res.status(401).json({ message: 'Accès non autorisé' });
+    return res.status(401).json({ message: "Accès non autorisé" });
   }
-
   next();
-}
-
-module.exports = authMiddleware;
+};

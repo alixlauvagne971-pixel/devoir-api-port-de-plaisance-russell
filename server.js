@@ -12,8 +12,9 @@ mongoose.connect(process.env.MONGO_URI)
     console.log('Collections :', collections.map(c => c.name));
 
     const PORT = process.env.PORT || 3000;
+
     app.listen(PORT, () => {
       console.log(`Serveur lancé sur le port ${PORT}`);
     });
   })
-  .catch((err) => console.log('Erreur MongoDB :', err));
+  .catch(err => console.log('Erreur MongoDB :', err));
